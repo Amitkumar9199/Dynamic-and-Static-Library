@@ -1,0 +1,34 @@
+RM = rm -f
+OBJECTFILES = stack.o queue.o llist.o heap.o union_find.o
+HEADERFILES = stack.h queue.h llist.h heap.h union_find.h
+SOURCECODES = stack.c queue.c llist.c heap.c union_find.c
+TARGETOBJECTS = $(OBJECTFILES) library
+DIRECTORYPATH = /usr/local/lib/datastruct
+LIBRARYPATH = /usr/lib
+INCLUDE_PATH = /usr/include
+
+all: $(TARGETOBJECTS)
+
+llist.o: defs.h llist.h llist.c
+	gcc -Wall -c llist.c
+stack.o: defs.h stack.h stack.c
+	gcc -Wall -c stack.c
+queue.o: defs.h queue.h queue.c
+	gcc -Wall -c queue.c
+heap.o: heap.h heap.c
+	gcc -Wall -c heap.c
+union_find.o: union_find.h union_find.c
+	gcc -Wall -c union_find.c
+
+library:
+	@ echo "\nDYNAMIC LIBRARY CREATION"
+	gcc -shared -fPIC -o libdatastructures.so $(OBJECTFILES)
+	
+install:
+	@ echo "\nDATASTRUCT LIBRARY INSTALLATION"
+	cp libdatastructures.so $(LIBRARYPATH)
+	cp $(HEADERFILES) $(INCLUDE_PATH)
+
+clean:
+	$(RM) $(OBJECTFILES) libdatastructures.so
+

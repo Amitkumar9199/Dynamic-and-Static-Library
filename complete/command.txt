@@ -1,0 +1,4 @@
+sudo make -f makefile.basic
+sudo make -f makefile.graph
+sudo make -f makefile
+./graph.out
